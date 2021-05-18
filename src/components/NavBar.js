@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "./NavBar.css";
+import Button from "./Button";
 
 const NavBar = () => {
   const [click, setClick] = useState(false);
+  const [button, setButton] = useState(true);
+
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+
+  const showButton = () => {
+    window.innerWidth <= 960 ? setButton(false) : setButton(true);
+  };
+
+  window.addEventListener("resize", showButton);
 
   return (
     <>
@@ -50,7 +60,7 @@ const NavBar = () => {
               </Link>
             </li>
           </ul>
-          
+          {button && <Button buttonStyle="btn--outline">Sign Up</Button>}
         </div>
       </nav>
     </>
